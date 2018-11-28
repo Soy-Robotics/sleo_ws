@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<package>
+  <name>sleo_bringup</name>
+  <version>0.0.1</version>
+  <description>Soy Sleo installation and integration package</description>
+
+  <author email="carlzhang@soyrobotics.com">Carl</author>
+
+  <maintainer email="zl@soyrobotics.com">Long Zhang</maintainer>
+
+  <license>BSD</license>
+
+  <url type="bugtracker">https://github.com/Soy-Robotics/sleo_robot/issues</url>
+  <url type="repository">https://github.com/Soy-Robotics/sleo_robot</url>
+  <url type="website">http://wiki.ros.org/sleo_bringup</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roslaunch</build_depend>
+  <build_depend>rospy</build_depend>
+
+  <run_depend>sleo_base</run_depend>
+  <run_depend>sleo_control</run_depend>
+  <run_depend>sleo_description</run_depend>
+  <run_depend>sleo_safety_controller</run_depend>
+  <run_depend>sleo_sensorpc</run_depend>
+  <run_depend>sleo_capabilities</run_depend>pend>
+  <run_depend>nmea_comms</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>depthimage_to_laserscan</run_depend>
+  <run_depend>laser_filters</run_depend>
+  <run_depend>rgbd_launch</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+
+  <export>
+  </export>
+</package>

@@ -1,0 +1,22 @@
+<library path="lib/libsleo_dashboard">
+  <class name="sleo_dashboard/SleoDashboard" type="sleo_dashboard::SleoDashboard" base_class_type="rqt_gui_cpp::Plugin">
+    <description>
+      A GUI plugin to view sleo platform topics.
+    </description>
+    <qtgui>
+      <group>
+        <label>Robot</label>
+        <icon type="theme">folder</icon>
+        <statustip>Plugins related to specific robots.</statustip>
+      </group>
+      <group>
+        <label>sleo</label>
+        <icon type="file">images/sleo_icon.png</icon>
+        <statustip>Plugins related to the Sleo robot.</statustip>
+      </group>
+      <label>Sleo Dashboard</label>
+      <icon type="file">images/sleo_icon.png</icon>
+      <statustip>A GUI plugin to view sleo platform topics.</statustip>
+    </qtgui>
+  </class>
+</library>

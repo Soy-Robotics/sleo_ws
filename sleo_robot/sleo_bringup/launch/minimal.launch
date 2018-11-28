@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2018, Soy Robotics
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of Soy Robotics nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<launch>
+  <!-- Sleo Configure -->
+  <arg name="base"		    	default="$(env SLEO_BASE)"				doc="mobile base type [sleo]"/>
+  <arg name="3d_sensor_enable"	default="$(env SLEO_3D_SENSOR_ENABLE)"	doc="3d sensor enable"/>
+  <arg name="laser"			    default="$(env SLEO_LASER)"				doc="2d laser types [sicklmsxx]"/>
+  <arg name="laser_enable"	    default="$(env SLEO_LASER_ENABLE)"		doc="2d laser enable"/>
+  <arg name="ur5_enable"        default="$(env SLEO_UR5_ENABLE)"        doc="set ur5 enable"/>
+  <arg name="velodyne_enable"   default="$(env SLEO_VELODYNE_ENABLE)"   doc="set velodyne enable"/>
+  <arg name="serialport"		default="$(env SLEO_SERIAL_PORT)"		doc="used by create to configure the port it is connected on [/dev/ttyUSB0, /dev/ttyS0]"/>
+  <arg name="simulation"        default="$(env SLEO_SIMULATION)"  		doc="set flags to indicate this turtle is run in simulation mode."/>
+  <arg name="sleo_screen_port"  default="$(env SLEO_SCREEN_SERIAL_PORT)"/>
+  <param name ="/use_sim_time" value="$(arg simulation)"/>
+
+
+  <!-- Load robot model -->
+  <include file="$(find sleo_bringup)/launch/includes/robot.launch.xml">
+    <arg name="base" value="$(arg base)" />
+    <arg name="ur5_enable" value="$(arg ur5_enable)"/>
+    <arg name="velodyne_enable" value="$(arg velodyne_enable)"/>
+    <arg name="3d_sensor_enable"   value="$(arg 3d_sensor_enable)"/>
+    <arg name="laser_enable" value="$(arg laser_enable)"/>
+  </include>
+
+  <!-- Load robot base  -->
+  <include file="$(find sleo_bringup)/launch/includes/mobile_base.launch.xml">
+    <arg name="base" value="$(arg base)" />
+    <arg name="serialport" value="$(arg serialport)" />
+    <arg name="sleo_screen_port" value="$(arg sleo_screen_port)"/>
+  </include>>
+
+</launch>

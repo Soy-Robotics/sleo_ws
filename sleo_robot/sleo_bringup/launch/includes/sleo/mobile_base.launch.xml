@@ -1,0 +1,34 @@
+<!--
+  sleo's implementation of sleo's mobile base.
+ -->
+<launch>
+  
+    <arg name="serialport"/>
+    <arg name="sleo_screen_port"/>
+
+     <!-- sleo harware driver -->
+    <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
+
+    <!-- sleo harware driver -->
+    <node pkg="roboteq_driver" type="roboteq_node" name="roboteq_driver" output="screen">
+      <param name="port" value="$(arg serialport)" />
+      <param name="baud" value="115200" />
+    </node>
+
+    <!-- Differential controller parameters and basic localization -->
+    <include file="$(find sleo_control)/launch/control.launch" />
+
+    <!-- Diagnostic Aggregator -->
+    <node pkg="sleo_diagnostics" type="diagnostic_publisher" name="sleo_diagnostics"/>
+
+
+    <node pkg="nodelet" type="nodelet" name="sleo_screen_manager"  args="manager"/>
+    <node pkg="nodelet" type="nodelet" name="sleo_screen_driver" args="load sleo_screen_driver/SleoScreenDriverNode sleo_screen_manager">
+      <param name="baudRate" type="int" value="115200"/>
+      <param name="serialNumber" type="string" value="$(arg sleo_screen_port)"/>
+      <remap from="/sleo_screen_driver/left/feedback" to="/sleo_driver/left/feedback"/>
+      <remap from="/sleo_screen_driver/right/feedback" to="/sleo_driver/right/feedback"/>
+      <remap from="/sleo_screen_driver/status" to="/sleo_driver/status"/>
+    </node>
+
+</launch>

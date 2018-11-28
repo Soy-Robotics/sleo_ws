@@ -1,0 +1,14 @@
+<!-- Example/standalone launcher for Sleo screen driver -->
+
+<launch>
+  <arg name="sleo_screen_port"  default="$(env SLEO_SCREEN_SERIAL_PORT)"/>
+
+  <node pkg="nodelet" type="nodelet" name="sleo_screen_manager"  args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="sleo_screen_driver" args="load sleo_screen_driver/SleoScreenDriverNode sleo_screen_manager">
+    <param name="baudRate" type="int" value="115200"/>
+	<param name="serialNumber" type="string" value="$(arg sleo_screen_port)"/>
+    <remap from="/sleo_screen_driver/left/feedback" to="/roboteq_driver/left/feedback"/>
+    <remap from="/sleo_screen_driver/right/feedback" to="/roboteq_driver/right/feedback"/>
+    <remap from="/sleo_screen_driver/status" to="/roboteq_driver/status"/>
+  </node>
+</launch>

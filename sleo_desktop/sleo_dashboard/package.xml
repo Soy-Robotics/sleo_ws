@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package>
+  <name>sleo_dashboard</name>
+  <version>0.0.1</version>
+  <description>sleo_dashboard provides a GUI plugin for sleo platform with motor and system.</description>
+
+  <maintainer email="zl@soyrobotics.com">Long Zhang</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://wiki.ros.org/sleo_dashboard</url>
+  <url type="repository">https://github.com/Sleo/sleo_desktop</url>
+  <url type="bugtracker">https://github.com/Sleo/sleo_desktop/issues</url>
+
+  <author>Carl Zhang</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>sleo_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>roslint</build_depend>
+  <build_depend>rqt_gui</build_depend>
+  <build_depend>rqt_gui_cpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+
+  <run_depend>sleo_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>roslint</run_depend>
+  <run_depend>rqt_gui</run_depend>
+  <run_depend>rqt_gui_cpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+
+  <export>
+    <rqt_gui plugin="${prefix}/plugins/plugin.xml"/>
+  </export>
+</package>

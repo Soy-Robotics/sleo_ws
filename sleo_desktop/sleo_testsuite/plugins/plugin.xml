@@ -1,0 +1,23 @@
+<library path="src">
+  <class name="Testsuite" type="sleo_testsuite.sleo_testsuite_plugin.TestsuitePlugin"
+         base_class_type="rqt_gui_py::Plugin">
+    <description>
+      A rqt gui plugins manager for sleo testsuite.
+    </description>
+    <qtgui>
+      <group>
+        <label>Robot</label>
+        <icon type="theme">folder</icon>
+        <statustip>Plugins related to specific robots.</statustip>
+      </group>
+      <group>
+        <label>sleo</label>
+        <icon type="file">images/sleo_icon.png</icon>
+        <statustip>Plugins related to the Sleo robot.</statustip>
+      </group>
+      <label>Sleo Testsuite</label>
+      <icon type="file">images/sleo_icon.png</icon>
+      <statustip> A rqt gui plugins manager for sleo testsuite.</statustip>
+    </qtgui>
+  </class>
+</library>

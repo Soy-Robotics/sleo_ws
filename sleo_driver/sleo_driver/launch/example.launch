@@ -1,0 +1,12 @@
+<launch>
+  <arg name="port" default="/dev/ttyUSB0" />
+  <node pkg="sleo_driver" type="driver_node" name="sleo_driver" output="screen">
+    <param name="port" value="$(arg port)" />
+    <param name="baud" value="115200" />
+  </node>
+
+  <!-- Differential controller parameters and basic localization -->
+  <include file="$(find sleo_control)/launch/control.launch" />
+
+  <include file="$(find sleo_description)/launch/view_model.launch"/>
+</launch>

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2017, Soy Robotics
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of Clearpath Robotics nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="sensor_gps">
+  <xacro:include filename="$(find sleo_description)/urdf/sleo_gazebo.urdf.xacro"/>
+  <xacro:include filename="$(find sleo_description)/urdf/sleo_properties.urdf.xacro"/>
+
+  <xacro:property name="gps_x" value="0.08" />
+  <xacro:property name="gps_y" value="0.08" />
+  <xacro:property name="gps_z" value="0.05526" />
+  <xacro:property name="gps_mass" value=".1" />
+
+  <xacro:macro name="sensor_gps" params="parent:=base_link">
+
+    <link name="base_gps_link">
+      <inertial>
+        <mass value="${gps_mass}" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="${0.0833333 * gps_mass * (gps_y*gps_y + gps_z*gps_z)}" ixy="0.0" ixz="0.0"
+          iyy="${0.0833333 * gps_mass * (gps_x*gps_x + gps_z*gps_z)}" iyz="0.0"
+          izz="${0.0833333 * gps_mass * (gps_x*gps_x + gps_y*gps_y)}" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+         <box size="0.053 0.051 0.021"/>
+          <!--mesh filename="package://sleo_description/meshes/sensors/gps.stl" /-->
+        </geometry>
+        <xacro:insert_block name="sleo_dark_grey" />
+      </visual>
+      <collision>
+        <origin xyz="0 0  0" rpy="0 0 0" />
+        <geometry>
+         <box size="0.053 0.051 0.021"/>
+          <!--mesh filename="package://sleo_description/meshes/sensors/gps.stl" /-->
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="base_gps_link_mount" type="fixed">
+      <origin xyz="${gps_px} ${gps_py} ${gps_pz}" rpy="${gps_or} ${gps_op} ${gps_oy}"/>
+      <parent link="${parent}" />
+      <child link="base_gps_link" />
+    </joint>
+
+    <link name="base_gps_frame"/>
+    <joint name="base_gps_joint" type="fixed">
+      <origin xyz="0 0 0" rpy=" 0 0 0" />
+      <parent link="base_gps_link" />
+      <child link="base_gps_frame" />
+    </joint>
+
+  </xacro:macro>
+</robot>

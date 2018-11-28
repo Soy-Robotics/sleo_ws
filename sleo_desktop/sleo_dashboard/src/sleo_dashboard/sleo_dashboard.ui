@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SleoDashboardWidget</class>
+ <widget class="QWidget" name="SleoDashboardWidget">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>618</width>
+    <height>281</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Sleo Dashboard</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="refresh_topics_push_button">
+       <property name="toolTip">
+        <string>Refresh topics</string>
+       </property>
+       <property name="icon">
+        <iconset theme="view-refresh">
+         <normaloff>.</normaloff>.</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_9">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="globalControlHorizontalLayout">
+     <item>
+      <layout class="QVBoxLayout" name="globalSystemStatusVerticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="systemStatushorizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="systemStatusLabel">
+           <property name="text">
+            <string>系统状态</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="systemVoltageHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="systemVoltageLabel">
+           <property name="text">
+            <string>系统电压:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="systemVoltageEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="systemCurrentHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="systemCurrentLabel">
+           <property name="text">
+            <string>系统电流:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="systemCurrentEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="systemTemperaturerHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="systemTemperaturerLabel">
+           <property name="text">
+            <string>系统温度:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="systemTemperaturerEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="systemErrorMessageHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="systemErrorMessageLabel">
+           <property name="text">
+            <string>错误信息:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="systemErrorMessageEditLabel">
+           <property name="text">
+            <string>None</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="systemStatusMessageHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="systemStatusMessageLabel">
+           <property name="text">
+            <string>平台状态:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="systemStatusMessageEditLabel">
+           <property name="text">
+            <string>None</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="globalMotorStatusVerticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="motorStatusHorizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorStatusLabel">
+           <property name="text">
+            <string>电机状态</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="motorMarkerHorizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorLeftLabel">
+           <property name="text">
+            <string>左</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorRightLabel">
+           <property name="text">
+            <string>右</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="motorCurrentHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="motorCurrentLabel">
+           <property name="text">
+            <string>电流A:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorCurrentLeftEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorCurrentRightEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="motorVoltageHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="motorVoltageLabel">
+           <property name="text">
+            <string>电压V:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorVoltageLeftEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorVoltageRightEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="motorCommandVelocityHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="motorCommandVelocityLabel">
+           <property name="text">
+            <string>命令速度:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorCommandVelocityLeftEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorCommandVelocityRightEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="motorMeasuredVelocityHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="motorMeasuredVelocityLabel">
+           <property name="text">
+            <string>测量速度:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorMeasuredVelocityLeftEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorMeasuredVelocityRightEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="motorSpeedHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="motorMeasuredPositionLabel">
+           <property name="text">
+            <string>测量位置:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorMeasuredPositionLeftEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorMeasuredPositionRightEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="motorTemperatureHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="motorTemperatureLabel">
+           <property name="text">
+            <string>温度℃:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorTemperatureLeftEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="motorTemperatureRightEditLabel">
+           <property name="text">
+            <string>0.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

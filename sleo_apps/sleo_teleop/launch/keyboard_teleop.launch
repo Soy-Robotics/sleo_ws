@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+  <!--  smooths inputs from cmd_vel_mux/input/teleop_raw to cmd_vel_mux/input/teleop -->
+  <include file="$(find sleo_teleop)/launch/includes/velocity_smoother.launch.xml"/>
+
+  <!-- sleo_teleop_key already has its own built in velocity smoother -->
+  <node pkg="sleo_teleop" type="sleo_teleop_key" name="sleo_teleop_keyboard"  output="screen">
+    <param name="scale_linear" value="0.5" type="double"/>
+    <param name="scale_angular" value="1.5" type="double"/>
+ <!--   <remap from="sleo_teleop_keyboard/cmd_vel" to="/sleo_velocity_controller/cmd_vel"/> -->
+    <remap from="sleo_teleop_keyboard/cmd_vel" to="sleo_velocity_smoother/raw_cmd_vel"/>
+  </node>
+</launch>

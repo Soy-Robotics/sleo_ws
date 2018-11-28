@@ -1,0 +1,3 @@
+need add in driver 
+  <!-- smoother nodelet -->
+  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>

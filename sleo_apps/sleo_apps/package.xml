@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <name>sleo_apps</name>
+  <version>0.0.1</version>
+
+  <description>Metapackage for Soy Sleo robot software</description>
+
+  <maintainer email="zl@soyrobotics.com">Long Zhang</maintainer>
+  <author email="carlzhang@soyrobotics.com">Carl</author>
+
+  <license>BSD</license>
+
+  <url type="bugtracker">https://github.com/Soy-Robotics/sleo_apps/issues</url>
+  <url type="repository">https://github.com/Soy-Robotics/sleo_apps</url>
+  <url type="website">http://wiki.ros.org/sleo_apps</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>sleo_navigation</run_depend>
+  <run_depend>sleo_teleop</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>

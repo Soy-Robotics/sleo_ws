@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="ur5_enable"        default="$(env SLEO_UR5_ENABLE)" />
+  <arg name="velodyne_enable"   default="$(env SLEO_VELODYNE_ENABLE)"/>
+  <arg name="3d_sensor_enable"  default="$(env SLEO_3D_SENSOR_ENABLE)"/>
+  <arg name="laser_enable"      default="$(env SLEO_LASER_ENABLE)"/>
+
+  <!-- Panther Configure -->
+  <arg name="world_name"        default="$(env SLEO_GAZEBO_WORLD_FILE)" doc="specify the world file of GAZEBO. "/>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find sleo_gazebo)/launch/includes/sleo_empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="ur5_enable" value="$(arg ur5_enable)"/>
+    <arg name="velodyne_enable" value="$(arg velodyne_enable)"/>
+    <arg name="3d_sensor_enable"   value="$(arg 3d_sensor_enable)"/>
+    <arg name="laser_enable" value="$(arg laser_enable)"/>
+  </include>
+
+</launch>

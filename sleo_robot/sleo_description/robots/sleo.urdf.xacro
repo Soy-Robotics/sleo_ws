@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot name="sleo" xmlns:xacro="http://ros.org/wiki/xacro">
+
+
+  <xacro:arg name="velodyne_enable" default="false" />
+  <xacro:arg name="ur5_enable" default="false" />
+  <xacro:arg name="3d_sensor_enable" default="false" />
+  <xacro:arg name="laser_enable" default="false" />
+  <xacro:include filename="$(find sleo_description)/urdf/sleo_library.urdf.xacro" />
+
+  <sleo/>
+
+  <xacro:if value="$(arg laser_enable)">
+    <sick_lms1xx                    parent="base_link"/>
+  </xacro:if>
+
+  <xacro:if value="$(arg 3d_sensor_enable)">
+    <sensor_d415                    parent="base_link"/>
+  </xacro:if>
+
+  <xacro:if value="$(arg velodyne_enable)">
+    <xacro:unless value="$(arg ur5_enable)">
+      <!--velodyne               parent="base_link" name="velodyne"> <origin xyz="0.0 0.0 0.403" rpy="0 0 0"/></velodyne-->
+      <HDL-32E parent="base_link" name="velodyne2" topic="/velodyne_points" hz="10" samples="220">
+        <origin xyz="0.0 0.0 0.403" rpy="0.0 0.0 0.0" />
+      </HDL-32E>
+    </xacro:unless>
+  </xacro:if>
+
+  <xacro:if value="$(arg ur5_enable)">
+    <xacro:unless value="$(arg velodyne_enable)">
+      <xacro:property name="reflect" value="-1" />
+
+      <!-- Spawn arm -->
+      <xacro:ur5_robot prefix="ur5_arm_" joint_limited="true"/>
+
+      <!-- Join arm -->
+      <joint name="ur5_arm_base" type="fixed">
+        <parent link="base_link" />
+        <child link="ur5_arm_base_link" />
+        <origin xyz="0.0 0.0 0.403" rpy="0.0 0.0 0.0" />
+      </joint>
+    </xacro:unless>
+  </xacro:if>
+
+</robot>

@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<robot name="sensor_d415" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find sleo_description)/urdf/sleo_gazebo.urdf.xacro"/>
+  <xacro:include filename="$(find sleo_description)/urdf/sleo_properties.urdf.xacro"/>
+  
+  <!-- The following values are approximate, and the camera node
+   publishing TF values with actual calibrated camera extrinsic values -->
+  <xacro:property name="d415_cam_depth_to_left_ir_offset" value="-0.0275"/>
+  <xacro:property name="d415_cam_depth_to_right_ir_offset" value="0.0275"/>
+
+  <!-- Parameterised in part by the values in sleo_properties.urdf.xacro -->
+  <xacro:macro name="sensor_d415" params="parent">
+    <joint name="camera_rgb_joint" type="fixed">
+      <origin xyz="${d415_px} ${d415_py} ${d415_pz}" rpy="${d415_or} ${d415_op} ${d415_oy}"/>
+      <parent link="${parent}"/>
+      <child link="camera_link" />
+    </joint>
+    <link name="camera_link">
+      <visual>
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+         <mesh filename="package://sleo_description/meshes/sensors/d415.stl"/>
+        </geometry>
+	    <xacro:insert_block name="sleo_black"/>
+      </visual>
+  	  <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="1.5707963 0 1.5707963"/>
+  	    <geometry>.
+         <mesh filename="package://sleo_description/meshes/sensors/d415.stl"/>
+  	    </geometry>
+  	  </collision>
+      <inertial>
+        <mass value="0.564" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.003881243" ixy="0.0" ixz="0.0"
+                 iyy="0.000498940" iyz="0.0"
+                 izz="0.003879257" />
+      </inertial>
+    </link>
+
+    <joint name="camera_joint" type="fixed">
+      <origin xyz="0.01 0.035 0.0115 " rpy="0 0 0"/>
+      <parent link="camera_link"/>
+      <child link="camera_rgb_frame"/>
+    </joint>  
+    <link name="camera_rgb_frame"/>
+
+    <joint name="camera_rgb_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="camera_rgb_frame" />
+      <child link="camera_rgb_optical_frame" />
+    </joint>
+    <link name="camera_rgb_optical_frame"/>
+
+
+    <!-- camera depth joints and links -->
+	<joint name="camera_depth_joint" type="fixed">
+	  <origin xyz="0 -0.043 0" rpy="0 0 0" />
+	  <parent link="camera_rgb_frame" />
+	  <child link="camera_depth_frame" />
+	</joint>
+	<link name="camera_depth_frame"/>
+
+    <!-- camera left IR joints and links -->
+    <joint name="camera_left_ir_joint" type="fixed">
+      <origin xyz="0 ${d415_cam_depth_to_left_ir_offset} 0" rpy="0 0 0" />
+      <parent link="camera_depth_frame" />
+      <child link="camera_left_ir_frame" />
+    </joint>
+    <link name="camera_left_ir_frame"/>
+
+    <joint name="camera_left_ir_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="camera_left_ir_frame" />
+      <child link="camera_left_ir_optical_frame" />
+    </joint>
+    <link name="camera_left_ir_optical_frame"/>
+
+    <!-- camera right IR joints and links -->
+    <joint name="camera_right_ir_joint" type="fixed">
+      <origin xyz="0 ${d415_cam_depth_to_right_ir_offset} 0" rpy="0 0 0" />
+      <parent link="camera_depth_frame" />
+      <child link="camera_right_ir_frame" />
+    </joint>
+    <link name="camera_right_ir_frame"/>
+
+    <joint name="camera_right_ir_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="camera_right_ir_frame" />
+      <child link="camera_right_ir_optical_frame" />
+    </joint>
+    <link name="camera_right_ir_optical_frame"/>
+
+	<!-- d415 sensor for simulation -->
+	<sleo_sim_3dsensor_custom frame="camera_left_ir_optical_frame"/>
+    <gazebo_material link="camera_link" color="Black"/>
+
+  </xacro:macro>
+</robot>

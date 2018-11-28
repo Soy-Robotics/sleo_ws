@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot>
+
+<!-- af500w camera param -->
+  <property name="af500w_px" value="0.37" />
+  <property name="af500w_py" value="0.0" />
+  <property name="af500w_pz" value="0.150" />
+  <property name="af500w_or" value="0" />
+  <property name="af500w_op" value="0" />
+  <property name="af500w_oy" value="0" />
+
+<!-- GPS param -->
+  <property name="gps_px" value="0.0" />
+  <property name="gps_py" value="0.0" />
+  <property name="gps_pz" value="0.150" />
+  <property name="gps_or" value="0" />
+  <property name="gps_op" value="0" />
+  <property name="gps_oy" value="0" />
+
+<!-- Realsense D415 param -->
+  <property name="d415_px" value="0.42832" />
+  <property name="d415_py" value="0.0" />
+  <property name="d415_pz" value="0.18005" />
+  <property name="d415_or" value="0" />
+  <property name="d415_op" value="0" />
+  <property name="d415_oy" value="0" />
+</robot>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+  The complete sleo library of xacros for easy reference
+ -->
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- General -->
+  <xacro:include filename="$(find sleo_description)/urdf/common_properties.urdf.xacro"/>
+  <xacro:include filename="$(find sleo_description)/urdf/sleo_properties.urdf.xacro"/>
+  <!-- Bases -->
+  <xacro:include filename="$(find sleo_description)/urdf/sleo.urdf.xacro" />
+  <!-- 2D Laser -->
+  <xacro:include filename="$(find sleo_description)/urdf/sensors/sick_lmsxx.urdf.xacro"/>
+
+  <!-- 3D sensor -->
+  <xacro:include filename="$(find sleo_description)/urdf/sensors/velodyne.urdf.xacro"/>
+  <xacro:include filename="$(find velodyne_description)/urdf/HDL-32E.urdf.xacro"/>
+  <xacro:include filename="$(find sleo_description)/urdf/sensors/d415.urdf.xacro"/>
+
+  <!-- Arm -->
+  <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
+
+</robot>

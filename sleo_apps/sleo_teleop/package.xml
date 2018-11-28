@@ -1,0 +1,37 @@
+<package>
+  <name>sleo_teleop</name>
+   <version>1.0.15</version>
+  <description>Soy sleo controller configurations</description>
+
+  <author email="carlzhang@soyrobotics.com">Carl</author>
+
+  <maintainer email="zl@soyrobotics.com">Long Zhang</maintainer>
+  <url type="website">http://wiki.ros.org/sleo_teleop</url>
+  <url type="bugtracker">https://github.com/Soy-Robotics/sleo_apps/issues</url>
+  <url type="repository">https://github.com/Soy-Robotics/sleo_apps</url>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>joy</build_depend>
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>joy</run_depend>
+
+  <build_depend>roslaunch</build_depend>
+  <run_depend>interactive_marker_twist_server</run_depend>
+  <run_depend>diff_drive_controller</run_depend>
+  <run_depend>joint_state_controller</run_depend>
+  <run_depend>joint_trajectory_controller</run_depend>
+  <run_depend>robot_localization</run_depend>
+  <run_depend>yocs_cmd_vel_mux</run_depend>
+  <run_depend>rostopic</run_depend>
+  <run_depend>controller_manager</run_depend>
+  <run_depend>teleop_twist_joy</run_depend>
+  <run_depend>twist_mux</run_depend>
+  <run_depend>yocs_velocity_smoother</run_depend>
+</package>

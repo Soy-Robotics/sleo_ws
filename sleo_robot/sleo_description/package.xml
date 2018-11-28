@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <name>sleo_description</name>
+  <version>0.0.1</version>
+
+  <description>Soy SLEO URDF description</description>
+
+  <author email="carlzhang@soyrobotics.com">Carl</author>
+  <maintainer email="zl@soyrobotics.com">Long Zhang</maintainer>
+
+  <url type="website">http://wiki.ros.org/sleo_description</url>
+  <url type="bugtracker">https://github.com/Soy-Robotics/sleo_robot/issues</url>
+  <url type="repository">https://github.com/Soy-Robotics/sleo_robot</url>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>xacro</run_depend>
+  <run_depend>velodyne_description</run_depend>
+  <run_depend>velodyne_gazebo_plugins</run_depend>
+
+  <export>
+  </export>
+</package>

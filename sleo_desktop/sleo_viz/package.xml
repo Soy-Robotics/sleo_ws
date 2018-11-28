@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <name>sleo_viz</name>
+  <version>0.0.1</version>
+  <description>Visualization configuration for Soy Sleo</description>
+
+  <author email="carlzhang@soyrobotics.com">Carl</author>
+
+  <maintainer email="zl@soyrobotics.com">Long Zhang</maintainer>
+
+  <license>BSD</license>
+  <url type="website">http://wiki.ros.org/sleo_viz</url>
+  <url type="repository">https://github.com/Sleo/sleo_desktop</url>
+  <url type="bugtracker">https://github.com/Sleo/sleo_desktop/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+ 
+  <build_depend>roslaunch</build_depend>
+
+  <run_depend>sleo_description</run_depend>
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>rviz</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+
+  <export>
+  </export>
+</package>

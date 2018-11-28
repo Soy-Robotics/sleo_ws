@@ -1,0 +1,34 @@
+topics:
+- name    : safety controller
+  topic   : twist_mux/safety_controller/cmd_vel
+  timeout : 1.0
+  priority: 60
+- name    : joy
+  topic   : twist_mux/joy_teleop/cmd_vel
+  timeout : 0.5
+  priority: 80
+- name    : keyboard
+  topic   : twist_mux/keyboard_teleop/cmd_vel
+  timeout : 0.5
+  priority: 80
+- name    : interactive_marker
+  topic   : twist_mux/twist_marker_server/cmd_vel
+  timeout : 0.5
+  priority: 8
+- name    : autonomy
+  topic   : twist_mux/platform_control/cmd_vel
+  timeout : 0.5
+  priority: 50
+- name    : external
+  topic   : twist_mux/cmd_vel
+  timeout : 0.5
+  priority: 1
+- name    : "Navigation"
+  topic   : "twist_mux/input/navi"
+  timeout:     1.0
+  priority:    50
+locks:
+- name    : e_stop
+  topic   : twist_mux/e_stop
+  timeout : 0.0    
+  priority: 255

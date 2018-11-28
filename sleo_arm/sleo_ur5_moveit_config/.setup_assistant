@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: sleo_description
+    relative_path: robots/sleo.urdf.xacro
+  SRDF:
+    relative_path: config/sleo.srdf
+  CONFIG:
+    author_name: Carl Zhang
+    author_email: carlzhang@soyrobotics.com
+    generated_timestamp: 1519627027

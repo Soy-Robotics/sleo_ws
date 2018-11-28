@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<robot name="sleo_gazebo" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="gazebo_material" params="link color">
+    <gazebo reference="${link}">
+      <material>Gazebo/${color}</material>
+    </gazebo>
+  </xacro:macro>
+
+  <!-- Microsoft Kinect / ASUS Xtion PRO Live for simulation -->
+  <xacro:macro name="sleo_sim_3dsensor">
+    <gazebo reference="camera_link">  
+      <sensor type="depth" name="camera">
+        <always_on>true</always_on>
+        <update_rate>20.0</update_rate>
+        <camera>
+          <horizontal_fov>${60.0*M_PI/180.0}</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8.0</far>
+          </clip>
+        </camera>
+        <plugin name="kinect_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+          <cameraName>camera</cameraName>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10</updateRate>
+          <imageTopicName>rgb/image_raw</imageTopicName>
+          <depthImageTopicName>depth/image_raw</depthImageTopicName>
+          <pointCloudTopicName>depth/points</pointCloudTopicName>
+          <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+          <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+          <frameName>camera_depth_optical_frame</frameName>
+          <baseline>0.1</baseline>
+          <distortion_k1>0.0</distortion_k1>
+          <distortion_k2>0.0</distortion_k2>
+          <distortion_k3>0.0</distortion_k3>
+          <distortion_t1>0.0</distortion_t1>
+          <distortion_t2>0.0</distortion_t2>
+          <pointCloudCutoff>0.4</pointCloudCutoff>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="sleo_sim_3dsensor_custom" params="reference:=camera_link frame:=laser rgb_img:=rgb/image_raw depth_img:=depth/image_raw depth_points:=depth/points rgb_info:=rgb/camera_info depth_info:=depth/camera_info update_rate:=10 topic:=scan sample_size:=720 update_rate:=50 camera_name:=camera">
+    <gazebo reference="${reference}">  
+      <sensor type="depth" name="camera">
+        <always_on>true</always_on>
+        <update_rate>20.0</update_rate>
+        <camera>
+          <horizontal_fov>${60.0*M_PI/180.0}</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8.0</far>
+          </clip>
+        </camera>
+        <plugin name="kinect_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+          <cameraName>${camera_name}</cameraName>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>${update_rate}</updateRate>
+          <imageTopicName>${rgb_img}</imageTopicName>
+          <depthImageTopicName>${depth_img}</depthImageTopicName>
+          <pointCloudTopicName>${depth_points}</pointCloudTopicName>
+          <cameraInfoTopicName>${rgb_info}</cameraInfoTopicName>
+          <depthImageCameraInfoTopicName>${depth_info}</depthImageCameraInfoTopicName>
+          <frameName>${frame}</frameName>
+          <baseline>0.1</baseline>
+          <distortion_k1>0.0</distortion_k1>
+          <distortion_k2>0.0</distortion_k2>
+          <distortion_k3>0.0</distortion_k3>
+          <distortion_t1>0.0</distortion_t1>
+          <distortion_t2>0.0</distortion_t2>
+          <pointCloudCutoff>0.4</pointCloudCutoff>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="sleo_sim_2dlaser">
+    <gazebo reference="base_laser">
+      <turnGravityOff>true</turnGravityOff>
+      <sensor type="ray" name="laser">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>false</visualize>
+        <update_rate>50</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1</resolution>
+              <min_angle>-2.35619</min_angle>
+              <max_angle>2.35619</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.10</min>
+            <max>30.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </ray>
+        <plugin name="gazebo_ros_laser" filename="libgazebo_ros_laser.so">
+          <topicName>scan</topicName>
+          <frameName>base_laser</frameName>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+
+  <xacro:macro name="sleo_sim_2dlaser_custom"  params="frame:=laser topic:=scan sample_size:=720 update_rate:=50
+               min_angle:=-2.35619 max_angle:=2.35619 min_range:=0.1 max_range:=30.0 robot_namespace:=/">
+    <gazebo reference="${frame}">
+      <turnGravityOff>true</turnGravityOff>
+      <sensor type="ray" name="${frame}">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>true</visualize>
+        <update_rate>${update_rate}</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>${sample_size}</samples>
+              <resolution>1</resolution>
+              <min_angle>${min_angle}</min_angle>
+              <max_angle>${max_angle}</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>${min_range}</min>
+            <max>${max_range}</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </ray>
+        <plugin name="gazebo_ros_laser" filename="libgazebo_ros_laser.so">
+          <topicName>${topic}</topicName>
+          <frameName>${frame}</frameName>
+          <robotNamespace>${robot_namespace}</robotNamespace>
+        </plugin>
+      </sensor>
+    </gazebo>  
+  </xacro:macro>
+
+
+  <!-- sleo imu/gps controller for simulation -->
+  <xacro:macro name="sleo_robot_gazebo">
+  
+    <!-- Gazebo plugin for ROS Control -->
+    <gazebo>
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+    </gazebo>
+  
+    <gazebo>
+      <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+        <robotNamespace>/</robotNamespace>
+        <updateRate>50.0</updateRate>
+        <topicName>imu/data</topicName>
+        <accelDrift>0.005 0.005 0.005</accelDrift>
+        <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+        <rateDrift>0.005 0.005 0.005 </rateDrift>
+        <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+        <headingDrift>0.005</headingDrift>
+        <headingGaussianNoise>0.005</headingGaussianNoise>
+      </plugin>
+    </gazebo>
+
+<!---->
+    <gazebo>
+      <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
+        <updateRate>40</updateRate>
+        <robotNamespace>/</robotNamespace>
+        <bodyName>base_link</bodyName>
+        <frameId>base_link</frameId>
+        <topicName>navsat/fix</topicName>
+        <velocityTopicName>navsat/vel</velocityTopicName>
+        <referenceLatitude>49.9</referenceLatitude>
+        <referenceLongitude>8.9</referenceLongitude>
+        <referenceHeading>0</referenceHeading>
+        <referenceAltitude>0</referenceAltitude>
+        <drift>0.0001 0.0001 0.0001</drift>
+      </plugin>
+    </gazebo>
+
+   </xacro:macro>
+
+  
+</robot>

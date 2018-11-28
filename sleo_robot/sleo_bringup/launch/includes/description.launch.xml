@@ -1,0 +1,18 @@
+<!--
+  Robot description only (used in private and paired master).
+ -->
+<launch> 
+  <arg name="ur5_enable"            default="$(env SLEO_UR5_ENABLE)" />
+  <arg name="velodyne_enable"       default="$(env SLEO_VELODYNE_ENABLE)"/>
+  <arg name="3d_sensor_enable"      default="$(env SLEO_3D_SENSOR_ENABLE)"/>
+  <arg name="laser_enable"          default="$(env SLEO_LASER_ENABLE)"/>
+  <arg name="base"		    	    default="$(env SLEO_BASE)"/>
+
+  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find sleo_description)/robots/$(arg base).urdf.xacro' 
+    velodyne_enable:=$(arg velodyne_enable)
+    ur5_enable:=$(arg ur5_enable)
+    laser_enable:=$(arg laser_enable)
+    3d_sensor_enable:=$(arg 3d_sensor_enable) " />
+  <param name="robot_description" command="$(arg urdf_file)" />
+
+</launch>

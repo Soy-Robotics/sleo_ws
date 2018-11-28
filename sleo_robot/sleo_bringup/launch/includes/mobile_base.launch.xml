@@ -1,0 +1,15 @@
+<!--
+  The mobile platform base.
+  
+  Selector for the base.
+ -->
+<launch>
+  <arg name="base"/>
+  <arg name="serialport"/>
+  <arg name="sleo_screen_port"/>
+  <include file="$(find sleo_bringup)/launch/includes/$(arg base)/mobile_base.launch.xml">
+    <arg name="serialport" value="$(arg serialport)" />
+    <arg name="sleo_screen_port" value="$(arg sleo_screen_port)"/>
+  </include>
+</launch>
+

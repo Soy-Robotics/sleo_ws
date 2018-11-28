@@ -1,0 +1,17 @@
+<launch>
+  <arg name="2d_laser" default="$(env SLEO_LASER)"/>
+
+  <arg name="host"     default="$(env SLEO_LASER_IP)" />
+  <arg name="frame_id" default="base_laser" />
+
+  <node pkg="lms1xx" name="lms1xx" type="LMS1xx_node">
+    <param name="host"                type="string" value="$(arg host)"/>  
+    <param name="frame_id"            type="string" value="$(arg frame_id)"/>
+  </node>
+
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain"
+      name="laser_filter">
+    <rosparam command="load" file="$(find roch_bringup)/param/laser/$(arg 2d_laser)/laser.yaml" />
+    <remap from="scan" to="scan" />
+  </node>
+</launch>

@@ -1,0 +1,8 @@
+<library path="lib/libsleo_screen_driver">
+  <class name="sleo_screen_driver/SleoScreenDriverNode" type="sleo_screen_driver::SleoScreenDriverNode" base_class_type="nodelet::Nodelet">
+    <description>
+      Drivers for Sleo screen.
+    </description>
+  </class>
+</library>
+

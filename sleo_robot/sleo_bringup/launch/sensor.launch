@@ -1,0 +1,146 @@
+<!-- 
+  Sensors driver launch files.
+-->
+<launch>
+  <arg name="base"		    	default="$(env SLEO_BASE)"				doc="mobile base type [sleo]"/>
+  <arg name="3d_sensor"			default="$(env SLEO_3D_SENSOR)"			doc="3d sensor types [d415]"/>
+  <arg name="3d_sensor_enable"	default="$(env SLEO_3D_SENSOR_ENABLE)"	doc="3d sensor enable"/>
+  <arg name="laser"			    default="$(env SLEO_LASER)"				doc="2d laser types [sicklmsxx]"/>
+  <arg name="laser_enable"	    default="$(env SLEO_LASER_ENABLE)"		doc="2d laser enable"/>
+  <arg name="ur5_enable"        default="$(env SLEO_UR5_ENABLE)"        doc="set ur5 enable"/>
+  <arg name="velodyne"          default="$(env SLEO_VELODYNE)"          doc="velodyne types [16, 32, 64]"/>
+  <arg name="velodyne_enable"   default="$(env SLEO_VELODYNE_ENABLE)"   doc="set velodyne enable"/>
+  <arg name="simulation"        default="$(env SLEO_SIMULATION)"  		doc="set flags to indicate this turtle is run in simulation mode."/>
+
+  <!-- Laser params -->
+  <arg name="laser_frame_id" default="base_laser" />
+
+  <!-- velodyne params -->
+  <!-- declare arguments with default values -->
+  <arg name="velodyne_calibration" default="$(find velodyne_pointcloud)/params/32db.yaml"/>
+  <arg name="velodyne_device_ip" default="" />
+  <arg name="velodyne_frame_id" default="velodyne" />
+  <arg name="velodyne_manager" default="$(arg velodyne_frame_id)_nodelet_manager" />
+  <arg name="velodyne_max_range" default="130.0" />
+  <arg name="velodyne_min_range" default="0.4" />
+  <arg name="velodyne_pcap" default="" />
+  <arg name="velodyne_port" default="2368" />
+  <arg name="velodyne_read_fast" default="false" />
+  <arg name="velodyne_read_once" default="false" />
+  <arg name="velodyne_repeat_delay" default="0.0" />
+  <arg name="velodyne_rpm" default="600.0" />
+
+  <!-- Camera params -->
+  <arg name="serial_no"           default=""/>
+  <arg name="json_file_path"      default=""/>
+
+  <arg name="fisheye_width"       default="640"/>
+  <arg name="fisheye_height"      default="480"/>
+  <arg name="enable_fisheye"      default="true"/>
+
+  <arg name="depth_width"         default="640"/>
+  <arg name="depth_height"        default="480"/>
+  <arg name="enable_depth"        default="true"/>
+
+  <arg name="infra1_width"        default="640"/>
+  <arg name="infra1_height"       default="480"/>
+  <arg name="enable_infra1"       default="true"/>
+
+  <arg name="infra2_width"        default="640"/>
+  <arg name="infra2_height"       default="480"/>
+  <arg name="enable_infra2"       default="true"/>
+
+  <arg name="color_width"         default="640"/>
+  <arg name="color_height"        default="480"/>
+  <arg name="enable_color"        default="true"/>
+
+  <arg name="fisheye_fps"         default="30"/>
+  <arg name="depth_fps"           default="30"/>
+  <arg name="infra1_fps"          default="30"/>
+  <arg name="infra2_fps"          default="30"/>
+  <arg name="color_fps"           default="30"/>
+  <arg name="gyro_fps"            default="1000"/>
+  <arg name="accel_fps"           default="1000"/>
+  <arg name="enable_imu"          default="true"/>
+
+  <arg name="enable_pointcloud"   default="false"/>
+  <arg name="enable_sync"         default="false"/>
+  <arg name="align_depth"         default="false"/>
+
+   <!--                        Camera  
+   -->
+  <group if="$(arg 3d_sensor_enable)">
+    <include file="$(find sleo_bringup)/launch/includes/3dsensor/$(arg 3d_sensor).launch.xml">
+
+      <arg name="serial_no"                value="$(arg serial_no)"/>
+      <arg name="json_file_path"           value="$(arg json_file_path)"/>
+
+      <arg name="enable_pointcloud"        value="$(arg enable_pointcloud)"/>
+      <arg name="enable_sync"              value="$(arg enable_sync)"/>
+      <arg name="align_depth"              value="$(arg align_depth)"/>
+
+      <arg name="fisheye_width"            value="$(arg fisheye_width)"/>
+      <arg name="fisheye_height"           value="$(arg fisheye_height)"/>
+      <arg name="enable_fisheye"           value="$(arg enable_fisheye)"/>
+
+      <arg name="depth_width"              value="$(arg depth_width)"/>
+      <arg name="depth_height"             value="$(arg depth_height)"/>
+      <arg name="enable_depth"             value="$(arg enable_depth)"/>
+
+      <arg name="color_width"              value="$(arg color_width)"/>
+      <arg name="color_height"             value="$(arg color_height)"/>
+      <arg name="enable_color"             value="$(arg enable_color)"/>
+
+      <arg name="infra1_width"             value="$(arg infra1_width)"/>
+      <arg name="infra1_height"            value="$(arg infra1_height)"/>
+      <arg name="enable_infra1"            value="$(arg enable_infra1)"/>
+
+      <arg name="infra2_width"             value="$(arg infra2_width)"/>
+      <arg name="infra2_height"            value="$(arg infra2_height)"/>
+      <arg name="enable_infra2"            value="$(arg enable_infra2)"/>
+
+      <arg name="fisheye_fps"              value="$(arg fisheye_fps)"/>
+      <arg name="depth_fps"                value="$(arg depth_fps)"/>
+      <arg name="infra1_fps"               value="$(arg infra1_fps)"/>
+      <arg name="infra2_fps"               value="$(arg infra2_fps)"/>
+      <arg name="color_fps"                value="$(arg color_fps)"/>
+      <arg name="gyro_fps"                 value="$(arg gyro_fps)"/>
+      <arg name="accel_fps"                value="$(arg accel_fps)"/>
+      <arg name="enable_imu"               value="$(arg enable_imu)"/>
+    </include>
+  </group>
+
+   <!--                        Laser  
+   -->
+  <group if="$(arg laser_enable)">
+    <include file="$(find sleo_bringup)/launch/includes/laser/$(arg laser).launch.xml">
+      <param name="frame_id"               value="$(arg laser_frame_id)"/>
+    </include>
+  </group>
+
+   <!--                        velodyne
+   -->
+  <group if="$(arg velodyne_enable)">
+    <include file="$(find sleo_bringup)/launch/includes/3dsensor/$(arg velodyne).launch.xml">
+    <arg name="device_ip"                  value="$(arg velodyne_device_ip)"/>
+    <arg name="frame_id"                   value="$(arg velodyne_frame_id)"/>
+    <arg name="manager"                    value="$(arg velodyne_manager)" />
+    <arg name="pcap"                       value="$(arg velodyne_pcap)"/>
+    <arg name="port"                       value="$(arg velodyne_port)"/>
+    <arg name="read_fast"                  value="$(arg velodyne_read_fast)"/>
+    <arg name="read_once"                  value="$(arg velodyne_read_once)"/>
+    <arg name="repeat_delay"               value="$(arg velodyne_repeat_delay)"/>
+    <arg name="rpm"                        value="$(arg velodyne_rpm)"/>
+
+    <arg name="calibration"                value="$(arg velodyne_calibration)"/>
+    <arg name="max_range"                  value="$(arg velodyne_max_range)"/>
+    <arg name="min_range"                  value="$(arg velodyne_min_range)"/>
+    </include>
+  </group>
+
+  <!--                         ur5
+   -->
+  <group if="$(arg ur5_enable)">
+    <include file="$(find sleo_bringup)/launch/includes/arm/ur5.launch.xml"/>
+  </group>
+</launch>

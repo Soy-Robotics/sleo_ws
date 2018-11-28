@@ -1,0 +1,41 @@
+<launch> 
+  <arg name="ur5_enable"            default="$(env SLEO_UR5_ENABLE)" />
+  <arg name="velodyne_enable"       default="$(env SLEO_VELODYNE_ENABLE)"/>
+  <arg name="3d_sensor_enable"      default="$(env SLEO_3D_SENSOR_ENABLE)"/>
+  <arg name="laser_enable"          default="$(env SLEO_LASER_ENABLE)"/>
+  <arg name="ur5_control_yaml_file" default="$(find sleo_control)/config/control_ur5.yaml"/>
+
+  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find sleo_description)/robots/sleo.urdf.xacro' 
+    velodyne_enable:=$(arg velodyne_enable)
+    ur5_enable:=$(arg ur5_enable)
+    laser_enable:=$(arg laser_enable)
+    3d_sensor_enable:=$(arg 3d_sensor_enable) " />
+  <param name="robot_description" command="$(arg urdf_file)" />
+  
+  <!-- Spawn robot in gazebo -->
+  <node name="spawn_sleo_model" pkg="gazebo_ros" type="spawn_model"
+    args="-x -1.90 -y 4.6457 -z 0 -unpause -urdf -param robot_description -model sleo"/>
+ 
+  <!-- velocity smoother -->
+  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+  </node>
+
+  <!-- Include ros_control configuration for ur5, only used in simulation -->
+  <group if="$(arg ur5_enable)">
+
+    <!-- Load UR5 controllers -->
+    <rosparam command="load" file="$(arg ur5_control_yaml_file)" />
+    <node name="arm_controller_spawner" pkg="controller_manager" type="spawner" args="arm_controller --shutdown-timeout 3"/>
+
+    <!-- Fake Calibration -->
+    <node pkg="rostopic" type="rostopic" name="fake_joint_calibration" args="pub calibrated std_msgs/Bool true" />
+
+    <!-- Stow the arm -->
+    <node pkg="sleo_control" type="reset_ur5.py" name="reset_ur5"/>
+
+</group>
+
+</launch>

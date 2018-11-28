@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <name>sleo_desktop</name>
+  <version>0.0.1</version>
+
+  <description>Metapackage for Soy Sleo robot software</description>
+
+  <maintainer email="zl@soyrobotics.com">Long Zhang</maintainer>
+  <author email="carlzhang@soyrobotics.com">Carl</author>
+
+  <license>BSD</license>
+  <url type="website">http://wiki.ros.org/sleo_desktop</url>
+  <url type="repository">https://github.com/Sleo/sleo_desktop</url>
+  <url type="bugtracker">https://github.com/Sleo/sleo_desktop/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>sleo_viz</run_depend>
+  <run_depend>sleo_dashboard</run_depend>
+  <run_depend>sleo_testsuite</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>
